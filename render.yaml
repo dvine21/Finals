@@ -1,23 +1,23 @@
 services:
   - type: web
-    name: django-finalapp
-    runtime: python
-    buildCommand: pip install -r requirements.txt
-    startCommand: gunicorn finals.wsgi:application
+    name: finals-web
+    env: python
+    plan: free
+    buildCommand: "pip install -r requirements.txt && python manage.py collectstatic --noinput"
+    startCommand: "./start.sh"
     envVars:
-      - key: DEBUG
-        value: False
-      - key: SECRET_KEY
-        generateValue: true
+      - key: DJANGO_SETTINGS_MODULE
+        value: "finals.settings"
       - key: DATABASE_URL
         fromDatabase:
-          name: finaldb
+          name: finals-db
           property: connectionString
+      - key: SECRET_KEY
+        generateValue: true
+      - key: DEBUG
+        value: "False"
 
 databases:
-  - name: finaldb
-    databaseName: finals_db
-    user: postgres
-    password: divine123
-    host: localhost
-    port: 5432
+  - name: finals-db
+    plan: free
+    postgresMajorVersion: 15
