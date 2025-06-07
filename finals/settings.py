@@ -15,7 +15,7 @@ SECRET_KEY = os.environ.get('SECRET_KEY', 'django-insecure-p2p05)-hf31tuhy0o@e4h
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = os.environ.get('DEBUG', 'False') == 'True'
 
-ALLOWED_HOSTS = ['https://finals-zfre.onrender.com']
+ALLOWED_HOSTS = ['finals-zfre.onrender.com']
 
 
 # Application definition
