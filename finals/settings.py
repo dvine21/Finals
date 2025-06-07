@@ -13,9 +13,9 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = os.environ.get('SECRET_KEY', 'django-insecure-p2p05)-hf31tuhy0o@e4hx1jugxno&^u*82tfs97j2j%hjy7v')
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = os.environ.get('DEBUG', 'False') == 'True'
+DEBUG = 'True'
 
-ALLOWED_HOSTS = ['*']
+ALLOWED_HOSTS = [os.environ.get('dpg-d11r68mmcj7s73eletlg-a', 'localhost')]
 
 # Application definition
 
@@ -48,7 +48,7 @@ ROOT_URLCONF = 'finals.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [BASE_DIR / 'finalapp/templates'],
+        'DIRS': [BASE_DIR / 'finalapp' / 'templates'],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
