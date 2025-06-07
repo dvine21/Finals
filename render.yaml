@@ -1,0 +1,23 @@
+services:
+  - type: web
+    name: django-finalapp
+    runtime: python
+    buildCommand: pip install -r requirements.txt
+    startCommand: gunicorn finals.wsgi:application
+    envVars:
+      - key: DEBUG
+        value: False
+      - key: SECRET_KEY
+        generateValue: true
+      - key: DATABASE_URL
+        fromDatabase:
+          name: finaldb
+          property: connectionString
+
+databases:
+  - name: finaldb
+    databaseName: finals_db
+    user: postgres
+    password: divine123
+    host: localhost
+    port: 5432
