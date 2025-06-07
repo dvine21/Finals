@@ -1,0 +1,26 @@
+{% extends 'base.html' %}
+
+{% block content %}
+  <h2>Add Subject for {{ student.full_name }}</h2>
+  <form method="post">
+    {% csrf_token %}
+    <div class="mb-3">
+      {{ form.subject_name.label_tag }}
+      {{ form.subject_name }}
+    </div>
+    <div class="mb-3">
+      {{ form.activity_grade.label_tag }}
+      {{ form.activity_grade }}
+    </div>
+    <div class="mb-3">
+      {{ form.quiz_grade.label_tag }}
+      {{ form.quiz_grade }}
+    </div>
+    <div class="mb-3">
+      {{ form.exam_grade.label_tag }}
+      {{ form.exam_grade }}
+    </div>
+    <button type="submit" class="btn btn-primary">Add Subject</button>
+  </form>
+  <a href="{% url 'student_detail' student.id %}" class="btn btn-secondary mt-3">Back</a>
+{% endblock %}
