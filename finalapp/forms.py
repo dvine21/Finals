@@ -1,4 +1,5 @@
 from django import forms
+from django.contrib.auth.forms import AuthenticationForm
 from .models import Student, Enrollment, Subject
 
 class StudentForm(forms.ModelForm):
@@ -38,4 +39,7 @@ def clean_student_id(self):
     student_id = self.cleaned_data['student_id']
     if Student.objects.filter(student_id=student_id).exists():
         raise forms.ValidationError("Student ID already exists.")
-    return student_id        
+    return student_id 
+class CustomLoginForm(AuthenticationForm):
+    username = forms.CharField(widget=forms.TextInput(attrs={'class': 'form-control'}))
+    password = forms.CharField(widget=forms.PasswordInput(attrs={'class': 'form-control'}))
