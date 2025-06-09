@@ -13,7 +13,7 @@ SECRET_KEY = config('SECRET_KEY')
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = 'RENDER' not in os.environ
 
-ALLOWED_HOSTS = ['finals-ud5x.onrender.com', 'localhost', '127.0.1', ]
+ALLOWED_HOSTS = ['finals-ud5x.onrender.com', 'localhost', '127.0.0.1', ]
 
 
 # Application definition
@@ -62,8 +62,9 @@ WSGI_APPLICATION = 'finals.wsgi.application'
 # https://docs.djangoproject.com/en/5.2/ref/settings/#databases
 
 DATABASES = {
-     "default": dj_database_url.config(
-        default=os.getenv("DATABASE_URL")
+      'default': dj_database_url.config(
+        default='sqlite:///' + str(BASE_DIR / 'db.sqlite3'),
+        conn_max_age=600
     )
 }
 
