@@ -1,7 +1,6 @@
 from django.urls import path
 from . import views
 from .forms import CustomLoginForm
-from django.contrib.auth import views as auth_views
 
 
 urlpatterns = [
@@ -13,5 +12,4 @@ urlpatterns = [
     path('enrollment/<int:pk>/edit/', views.enrollment_edit, name='enrollment_edit'),
     path('enrollment/<int:pk>/delete/', views.enrollment_delete, name='enrollment_delete'),
     path('student/<int:student_id>/add-enrollment/', views.add_enrollment, name='add_enrollment'),
-    path('login/', auth_views.LoginView.as_view(template_name='login.html', authentication_form=CustomLoginForm), name='login'),
 ]

@@ -4,9 +4,6 @@ from .models import Student, Enrollment
 from .forms import StudentForm, EnrollmentForm
 
 def index(request):
-    if not request.user.is_authenticated:
-        return redirect('login')
-
     query = request.GET.get('q')
     if query:
         students = Student.objects.filter(full_name__icontains=query) | Student.objects.filter(student_id__icontains=query)
@@ -16,9 +13,6 @@ def index(request):
 
 
 def student_detail(request, pk):
-    if not request.user.is_authenticated:
-        return redirect('login')
-
     student = get_object_or_404(Student, pk=pk)
     enrollments = Enrollment.objects.filter(student=student)
 
@@ -39,9 +33,6 @@ def student_detail(request, pk):
     })
 
 def student_create(request):
-    if not request.user.is_authenticated:
-        return redirect('login')
-
     if request.method == 'POST':
         form = StudentForm(request.POST)
         if form.is_valid():
@@ -55,9 +46,6 @@ def student_create(request):
     return render(request, 'student_form.html', {'form': form})
 
 def student_edit(request, pk):
-    if not request.user.is_authenticated:
-        return redirect('login')
-
     student = get_object_or_404(Student, pk=pk)
     if request.method == 'POST':
         form = StudentForm(request.POST, instance=student)
@@ -69,17 +57,11 @@ def student_edit(request, pk):
     return render(request, 'student_form.html', {'form': form})
 
 def student_delete(request, pk):
-    if not request.user.is_authenticated:
-        return redirect('login')
-
     student = get_object_or_404(Student, pk=pk)
     student.delete()
     return redirect('index')
 
 def enrollment_edit(request, pk):
-    if not request.user.is_authenticated:
-        return redirect('login')
-
     enrollment = get_object_or_404(Enrollment, pk=pk)
     if request.method == 'POST':
         form = EnrollmentForm(request.POST, instance=enrollment)
@@ -93,18 +75,12 @@ def enrollment_edit(request, pk):
 
 
 def enrollment_delete(request, pk):
-    if not request.user.is_authenticated:
-        return redirect('login')
-
     enrollment = get_object_or_404(Enrollment, pk=pk)
     student_pk = enrollment.student.pk
     enrollment.delete()
     return redirect('student_detail', pk=student_pk)
 
 def add_enrollment(request, student_id):
-    if not request.user.is_authenticated:
-        return redirect('login')
-
     student = get_object_or_404(Student, id=student_id)
 
     if request.method == 'POST':
